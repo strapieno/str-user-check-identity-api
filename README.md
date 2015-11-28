@@ -1,0 +1,1 @@
+# Strapieno user check identity

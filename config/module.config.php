@@ -1,0 +1,90 @@
+<?php
+
+return [
+    'service_manager' => [
+        'factories' => [
+            'Strapieno\ModelUtils\Listener\ListenerManager' => 'Strapieno\ModelUtils\Listener\ListenerManagerFactory'
+        ],
+        'invokables' => [
+            'Strapieno\ModelUtils\Delegator\AttachListenerDelegator' =>  'Strapieno\ModelUtils\Delegator\AttachListenerDelegator'
+        ],
+        'aliases' => [
+            'listenerManager' => 'Strapieno\ModelUtils\Listener\ListenerManager'
+        ]
+    ],
+    // Register listener to listener manager
+    'service-listeners' => [
+        'invokables' => [
+            'Strapieno\UserCheckIdentity\Api\V1\Listener' => 'Strapieno\UserCheckIdentity\Api\V1\Listener'
+        ]
+    ],
+    // Register listener to User rest controller
+    'attach-listeners' => [
+        'Strapieno\User\Api\V1\Rest\Controller' => [
+            'Strapieno\UserCheckIdentity\Api\V1\Listener'
+        ]
+    ],
+    // Attach delegetor listener to user rest controller
+    'controllers' => [
+        'delegators' => [
+            'Strapieno\User\Api\V1\Rest\Controller' => [
+                'Strapieno\ModelUtils\Delegator\AttachListenerDelegator'
+            ]
+        ]
+    ],
+    'router' => [
+        'routes' => [
+            'api-rpc' => [
+                'type' => 'Literal',
+                'options' => [
+                    'route' => '/rpc'
+                ],
+                'child_routes' => [
+                    'validate-identity' => [
+                        'type' => 'Segment',
+                        'may_terminate' => true,
+                        'options' => [
+                            'route' => '/validate-identity',
+                            'defaults' => [
+                                'controller' => 'Strapieno\UserCheckIdentity\Api\V1\UserCheckRpcController',
+                                'action' => 'validateIdentity'
+                            ],
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ],
+    'controllers' => [
+        'invokables' => [
+            'Strapieno\UserCheckIdentity\Api\V1\RpcController' => 'Strapieno\UserCheckIdentity\Api\V1\RpcController',
+        ]
+    ],
+    'zf-rpc' => [
+        'Strapieno\UserCheckIdentity\Api\V1\RpcController' => [
+            'service_name' => 'validate-identity',
+            'http_methods' => ['POST'],
+            'route_name' => 'api-rpc/validate-identity',
+        ],
+    ],
+     'zf-content-negotiation' => [
+        'accept_whitelist' => [
+            'Strapieno\UserCheckIdentity\Api\V1\RpcController' => [
+                'application/hal+json',
+                'application/json',
+            ]
+
+        ],
+        'content_type_whitelist' => [
+            'Strapieno\UserCheckIdentity\Api\V1\RpcController' => [
+                'application/json',
+            ],
+        ]
+    ],
+    'zf-content-validation' => [
+        'Strapieno\UserCheckIdentity\Api\V1\RpcController' => [
+            'input_filter' => 'Strapieno\UserCheckIdentity\Api\V1\InputFiler\GenerateIdentityInputFilter'
+        ]
+    ]
+];
+
