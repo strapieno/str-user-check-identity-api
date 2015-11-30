@@ -54,7 +54,7 @@ return [
             'Strapieno\User\Api\V1\Rest\Controller' => [
                 'Strapieno\ModelUtils\Delegator\AttachListenerDelegator'
             ]
-        ]
+        ],
         'invokables' => [
             'Strapieno\UserCheckIdentity\Api\V1\RpcController' => 'Strapieno\UserCheckIdentity\Api\V1\RpcController',
         ]
