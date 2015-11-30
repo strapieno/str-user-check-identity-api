@@ -2,6 +2,7 @@
 
 namespace Strapieno\UserCheckIdentity\Api\V1\InputFiler;
 
+use Zend\InputFilter\Input;
 use Zend\InputFilter\InputFilter;
 
 /**

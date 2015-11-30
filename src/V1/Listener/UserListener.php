@@ -8,6 +8,7 @@ use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\ListenerAggregateTrait;
 use Zend\EventManager\Event;
+use ZF\Hal\Entity;
 
 /**
  * Class UserListener
@@ -29,8 +30,12 @@ class UserListener implements ListenerAggregateInterface
      */
     public function generateIdentityToken(Event $e)
     {
-        $user = $e->getParam('entity');
-        if ($user instanceof IdentityExistAwareInterface && $user instanceof ActiveRecordInterface) {
+        $hal = $e->getParam('entity');
+        if ($hal instanceof Entity
+            && ($user = $hal->entity)
+            && $user instanceof IdentityExistAwareInterface
+            && $user instanceof ActiveRecordInterface)
+        {
             $user->generateIdentityExistToken();
             $user->save();
         }

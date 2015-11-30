@@ -15,21 +15,14 @@ return [
     // Register listener to listener manager
     'service-listeners' => [
         'invokables' => [
-            'Strapieno\UserCheckIdentity\Api\V1\Listener' => 'Strapieno\UserCheckIdentity\Api\V1\Listener'
+            'Strapieno\UserCheckIdentity\Api\V1\Listener\UserListener'
+                => 'Strapieno\UserCheckIdentity\Api\V1\Listener\UserListener'
         ]
     ],
     // Register listener to User rest controller
     'attach-listeners' => [
         'Strapieno\User\Api\V1\Rest\Controller' => [
-            'Strapieno\UserCheckIdentity\Api\V1\Listener'
-        ]
-    ],
-    // Attach delegetor listener to user rest controller
-    'controllers' => [
-        'delegators' => [
-            'Strapieno\User\Api\V1\Rest\Controller' => [
-                'Strapieno\ModelUtils\Delegator\AttachListenerDelegator'
-            ]
+            'Strapieno\UserCheckIdentity\Api\V1\Listener\UserListener'
         ]
     ],
     'router' => [
@@ -46,7 +39,7 @@ return [
                         'options' => [
                             'route' => '/validate-identity',
                             'defaults' => [
-                                'controller' => 'Strapieno\UserCheckIdentity\Api\V1\UserCheckRpcController',
+                                'controller' => 'Strapieno\UserCheckIdentity\Api\V1\RpcController',
                                 'action' => 'validateIdentity'
                             ],
                         ]
@@ -56,6 +49,12 @@ return [
         ]
     ],
     'controllers' => [
+        // Attach delegetor listener to user rest controller
+        'delegators' => [
+            'Strapieno\User\Api\V1\Rest\Controller' => [
+                'Strapieno\ModelUtils\Delegator\AttachListenerDelegator'
+            ]
+        ]
         'invokables' => [
             'Strapieno\UserCheckIdentity\Api\V1\RpcController' => 'Strapieno\UserCheckIdentity\Api\V1\RpcController',
         ]
