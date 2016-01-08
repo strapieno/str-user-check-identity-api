@@ -3,19 +3,13 @@
 namespace Strapieno\UserCheckIdentity\Api\V1;
 
 use Matryoshka\Model\Object\ActiveRecord\ActiveRecordInterface;
-use Strapieno\Auth\Model\OAuth2\AdapterInterface;
-use Strapieno\ModelUtils\Entity\PasswordAwareInterface;
-use Strapieno\ModelUtils\Entity\RercoverPasswordAwareInterface;
 use Strapieno\User\Model\Criteria\Mongo\UserMongoCollectionCriteria;
 use Strapieno\User\Model\Entity\State\UserStateAwareInterface;
-use Strapieno\User\Model\Entity\UserInterface;
 use Strapieno\User\Model\UserModelInterface;
 use Strapieno\User\Model\UserModelService;
-use Zend\Authentication\Storage\StorageInterface;
 use Zend\Http\Response;
 use Zend\InputFilter\InputFilter;
 use Zend\Mvc\MvcEvent;
-use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Model\JsonModel;
 use ZF\ApiProblem\ApiProblem;
 use ZF\ApiProblem\View\ApiProblemModel;

@@ -3,11 +3,11 @@
 namespace Strapieno\UserCheckIdentity\Api\V1\Listener;
 
 use Matryoshka\Model\Object\ActiveRecord\ActiveRecordInterface;
-use Strapieno\ModelUtils\Entity\IdentityExistAwareInterface;
+use Strapieno\Utils\Model\Entity\IdentityExistAwareInterface;
+use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\ListenerAggregateTrait;
-use Zend\EventManager\Event;
 use ZF\Hal\Entity;
 
 /**

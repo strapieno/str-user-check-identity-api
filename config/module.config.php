@@ -3,13 +3,13 @@
 return [
     'service_manager' => [
         'factories' => [
-            'Strapieno\ModelUtils\Listener\ListenerManager' => 'Strapieno\ModelUtils\Listener\ListenerManagerFactory'
+            'Strapieno\Utils\Listener\ListenerManager' => 'Strapieno\Utils\Listener\ListenerManagerFactory'
         ],
         'invokables' => [
-            'Strapieno\ModelUtils\Delegator\AttachListenerDelegator' =>  'Strapieno\ModelUtils\Delegator\AttachListenerDelegator'
+            'Strapieno\Utils\Delegator\AttachListenerDelegator' =>  'Strapieno\Utils\Delegator\AttachListenerDelegator'
         ],
         'aliases' => [
-            'listenerManager' => 'Strapieno\ModelUtils\Listener\ListenerManager'
+            'listenerManager' => 'Strapieno\Utils\Listener\ListenerManager'
         ]
     ],
     // Register listener to listener manager
@@ -52,7 +52,7 @@ return [
         // Attach delegetor listener to user rest controller
         'delegators' => [
             'Strapieno\User\Api\V1\Rest\Controller' => [
-                'Strapieno\ModelUtils\Delegator\AttachListenerDelegator'
+                'Strapieno\Utils\Delegator\AttachListenerDelegator'
             ]
         ],
         'invokables' => [
