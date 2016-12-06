@@ -11,6 +11,8 @@
     "strapieno/str-auth-model" : "dev-develop"
   },
   "require-dev": {
+    "mandrill/mandrill": "~1.0.54",
+    "ripaclub/zf2-mailman": "~0.3.2",
     "phpunit/phpunit": "~4.7",
     "zendframework/zftool": "dev-master",
     "robertboloc/zf2-components-list-generator": "dev-master"
