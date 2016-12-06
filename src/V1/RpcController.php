@@ -7,6 +7,7 @@ use Strapieno\User\Model\Criteria\Mongo\UserMongoCollectionCriteria;
 use Strapieno\User\Model\Entity\State\UserStateAwareInterface;
 use Strapieno\User\Model\UserModelInterface;
 use Strapieno\User\Model\UserModelService;
+use Strapieno\Utils\Model\Entity\StateInterface;
 use Zend\Http\Response;
 use Zend\InputFilter\InputFilter;
 use Zend\Mvc\MvcEvent;
@@ -40,6 +41,13 @@ class RpcController extends ApigilityRpcController
         if ($result->count() == 1) {
             $user = $result->current();
             if ($user instanceof UserStateAwareInterface && $user instanceof ActiveRecordInterface) {
+
+                /** @var $status StateInterface */
+                $status = $user->getState();
+                if ($status->getName() != 'registered') {
+                    return new ApiProblemModel(new ApiProblem(409, 'User alreay validate'));
+                }
+
                 $user->validated();
                 $user->save();
 
