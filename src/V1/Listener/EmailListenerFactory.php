@@ -17,7 +17,7 @@ class EmailListenerFactory implements FactoryInterface
             $serviceLocator = $serviceLocator->getServiceLocator();
         }
 
-        $config = $services->get('Config');
+        $config = $serviceLocator->get('Config');
 
         if (!isset($config['user_listener']['template'])) {
            throw new ServiceNotCreatedException('Template not set in EmailListenerFactory');
