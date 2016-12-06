@@ -98,7 +98,7 @@ class EmailListener implements ListenerAggregateInterface, ServiceLocatorAwareIn
      * @param string $subject
      * @return $this
      */
-    public function setSubject(mixed $subject)
+    public function setSubject($subject)
     {
         $this->subject = $subject;
         return $this;
@@ -116,7 +116,7 @@ class EmailListener implements ListenerAggregateInterface, ServiceLocatorAwareIn
      * @param string $template
      * @return $this
      */
-    public function setTemplate(mixed $template)
+    public function setTemplate($template)
     {
         $this->template = $template;
         return $this;

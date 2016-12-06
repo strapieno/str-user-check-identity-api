@@ -1,6 +1,7 @@
 <?php
 namespace Strapieno\UserCheckIdentity\Api\V1\Listener;
 
+use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\Exception\ServiceNotCreatedException;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -12,6 +13,10 @@ class EmailListenerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
+        if ($serviceLocator instanceof AbstractPluginManager) {
+            $serviceLocator = $serviceLocator->getServiceLocator();
+        }
+
         $config = $services->get('Config');
 
         if (!isset($config['user_listener']['template'])) {
