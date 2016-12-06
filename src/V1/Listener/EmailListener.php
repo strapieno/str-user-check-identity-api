@@ -10,8 +10,10 @@ use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\EventManager\ListenerAggregateTrait;
+use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
+use Zend\View\Model\ViewModel;
 use ZF\Hal\Entity;
 
 /**
@@ -65,7 +67,7 @@ class EmailListener implements ListenerAggregateInterface, ServiceLocatorAwareIn
     {
         $template = new ViewModel();
         $template->setVariable('user', $user);
-        $template->setTemplate($this->getTemplateMail());
+        $template->setTemplate($this->getTemplate());
 
         return $template;
     }
@@ -84,6 +86,13 @@ class EmailListener implements ListenerAggregateInterface, ServiceLocatorAwareIn
         $message->addHtmlPart($viewRenderer->render($this->getTemplateMail($user)));
 
         return $message;
+    }
+
+    public function getServiceLocator()
+    {
+        if ($this->serviceLocator instanceof AbstractPluginManager) {
+            return $this->serviceLocator->getServiceLocator();
+        }
     }
 
     /**
