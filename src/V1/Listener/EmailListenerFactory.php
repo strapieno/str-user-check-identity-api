@@ -23,12 +23,12 @@ class EmailListenerFactory implements FactoryInterface
            throw new ServiceNotCreatedException('Template not set in EmailListenerFactory');
         }
 
-        if (!isset($config['user_listener']['subject'])) {
+        if (!isset($config['user_listener']['check-identity-subject'])) {
             throw new ServiceNotCreatedException('Subject not set in EmailListenerFactory');
         }
 
         $listener = new EmailListener();
-        $listener->setSubject($config['user_listener']['subject']);
+        $listener->setSubject($config['user_listener']['check-identity-subject']);
         $listener->setTemplate($config['user_listener']['template']);
         return $listener;
     }

@@ -84,6 +84,20 @@ return [
         'Strapieno\UserCheckIdentity\Api\V1\RpcController' => [
             'input_filter' => 'Strapieno\UserCheckIdentity\Api\V1\InputFiler\GenerateIdentityInputFilter'
         ]
+    ],
+    'strapieno_input_filter_specs' => [
+        'Strapieno\UserCheckIdentity\Api\V1\InputFiler\GenerateIdentityInputFilter' => [
+            'identity' => [
+                'name' => 'identity',
+                'require' => true,
+                'allow_empty' => false,
+                'filters' => [
+                    'stringtrim' => [
+                        'name' => 'stringtrim',
+                    ]
+                ]
+            ]
+        ]
     ]
 ];
 
