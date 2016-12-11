@@ -19,17 +19,17 @@ class EmailListenerFactory implements FactoryInterface
 
         $config = $serviceLocator->get('Config');
 
-        if (!isset($config['user_listener']['template'])) {
+        if (!isset($config['email-setting']['check-identity-template'])) {
            throw new ServiceNotCreatedException('Template not set in EmailListenerFactory');
         }
 
-        if (!isset($config['user_listener']['check-identity-subject'])) {
+        if (!isset($config['email-setting']['check-identity-subject'])) {
             throw new ServiceNotCreatedException('Subject not set in EmailListenerFactory');
         }
 
         $listener = new EmailListener();
-        $listener->setSubject($config['user_listener']['check-identity-subject']);
-        $listener->setTemplate($config['user_listener']['template']);
+        $listener->setSubject($config['email-setting']['check-identity-subject']);
+        $listener->setTemplate($config['email-setting']['check-identity-template']);
         return $listener;
     }
-}
+}r
