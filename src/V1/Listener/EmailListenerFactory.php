@@ -32,4 +32,4 @@ class EmailListenerFactory implements FactoryInterface
         $listener->setTemplate($config['email-setting']['check-identity-template']);
         return $listener;
     }
-}r
+}
