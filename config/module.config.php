@@ -88,7 +88,7 @@ return [
     'strapieno_input_filter_specs' => [
         'Strapieno\UserCheckIdentity\Api\V1\InputFiler\GenerateIdentityInputFilter' => [
             'identity' => [
-                'name' => 'identity',
+                'name' => 'token',
                 'require' => true,
                 'allow_empty' => false,
                 'filters' => [
